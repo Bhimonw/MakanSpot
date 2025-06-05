@@ -13,8 +13,10 @@ def recommendations():
         price_range = int(data['price_range'])
         min_rating = float(data['min_rating'])
         max_distance = float(data['max_distance'])
+        kategori = data.get('kategori')  # Parameter opsional
     except (ValueError, TypeError):
         return jsonify({'error': 'Invalid input type. price_range (int), min_rating (float), max_distance (float) required.'}), 400
-    result = get_recommendations(price_range, min_rating, max_distance)
+    
+    result = get_recommendations(price_range, min_rating, max_distance, kategori)
     # Convert list of TempatMakan to list of dict
-    return jsonify([t.to_dict() for t in result]) 
+    return jsonify([t.to_dict() for t in result])
